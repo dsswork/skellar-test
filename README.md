@@ -7,7 +7,7 @@
 
 1. Run git clone https://github.com/dsswork/skellar-test
 2. Run cp .env.example .env
-4. Set up APP_PORT, DOCKER_USERNAME and DOCKER_USER_ID 
+4. Set up APP_PORT, DOCKER_USERNAME and DOCKER_USER_ID in .env
 5. Run docker compose build
 6. Run docker compose up -d
 7. Run docker exec -it skellar-app -bash 
