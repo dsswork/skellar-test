@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+
+    app:
+        build:
+          args:
+              user: ${DOCKER_USERNAME}
+              uid: ${DOCKER_USER_ID}
+          context: ./docker/php
+          dockerfile: Dockerfile
+        image: skelar
+        container_name: skelar-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        tty: true
+        volumes:
+          - ./:/var/www
+          - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+          - skelar
+
+    db:
+      image: postgis/postgis:14-3.1
+      restart: always
+      container_name: skelar-db
+      environment:
+        - POSTGRES_DB=${DB_DATABASE}
+        - POSTGRES_USER=${DB_USERNAME}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+      volumes:
+        - ./docker/postgress:/var/lib/postgresql/data
+      networks:
+          - skelar
+
+    nginx:
+        image: nginx:1.17-alpine
+        container_name: skelar-nginx
+        restart: unless-stopped
+        tty: true
+        ports:
+          - "${APP_PORT:-80}:80"
+        volumes:
+          - ./:/var/www
+          - ./docker/nginx:/etc/nginx/conf.d
+        networks:
+          - skelar
+
+
+networks:
+    skelar:
+        driver: bridge
