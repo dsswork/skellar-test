@@ -5,7 +5,7 @@
 
 ### Base Settings
 
-1. Run git clone https://github.com/dsswork/skelar-test
+1. Run git clone https://github.com/dsswork/skellar-test
 2. Run cp .env.example .env
 4. Set up APP_PORT, DOCKER_USERNAME and DOCKER_USER_ID in .env
 5. Run docker compose build
