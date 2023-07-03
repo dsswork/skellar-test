@@ -13,6 +13,6 @@
 7. Run docker exec -it skelar-app -bash 
 8. Run composer install
 9. Run php artisan key:generate
-10. Run php artisan mifrate:fresh --seed
+10. Run php artisan migrate:fresh --seed
 11. Run npm install
 12. Run npm run build
